@@ -1,7 +1,25 @@
 [project]
 name = "news-scraper-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "MCP server that fetches article data (title, text, author, date) from a URL using newspaper3k."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = []
+dependencies = [
+    "loguru>=0.7.2",
+    "requests>=2.32.3",
+    "mcp[cli]>=1.2.0",
+    "newspaper3k>=0.2.8",
+    "lxml[html_clean]>=4.9.0",
+]
+
+[project.scripts]
+news-scraper-mcp = "news_scraper_mcp.server:app.run"
+
+[tool.uv]
+package = true
+dev-dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/yourusername/news-scraper-mcp"
+Repository = "https://github.com/yourusername/news-scraper-mcp"
+Issues = "https://github.com/yourusername/news-scraper-mcp/issues"
