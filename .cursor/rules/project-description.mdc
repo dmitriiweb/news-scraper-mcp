@@ -1,0 +1,19 @@
+---
+alwaysApply: true
+---
+The MCP server to scrape news articles
+
+1. Get URL from user
+2. Fetch articles data from the URL
+
+Tech:
+requests
+loguru
+mcp[cli]
+newspaper3k
+
+Needed article data: title, text, author, date
+
+This MCP server will use for article summarizers later
+
+The MCP will run with uv or uvx, and not docker-compose
