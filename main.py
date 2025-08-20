@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Main entry point for the news scraper MCP server."""
+"""Main entry point for the article scraper MCP server."""
 
 from news_scraper_mcp.server import app
 
