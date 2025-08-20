@@ -13,6 +13,12 @@ import requests
 # Compile regex patterns at module level
 URL_PATTERN = re.compile(r"^https?://.+")
 
+# HTTP headers
+USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+    "Chrome/138.0.0.0 Safari/537.36"
+)
+
 @dataclass(slots=True)
 class ArticleData:
     """Structured article data."""
@@ -78,9 +84,9 @@ def fetch_article(url: str) -> dict[str, Any]:
     if not validate_url(url):
         raise ValueError(f"Invalid URL provided: {url}")
 
-    # Warm up: ensure URL is reachable and log response metadata
+    # Fetch page HTML using requests with custom User-Agent
     try:
-        response = requests.get(url, timeout=15)
+        response = requests.get(url, timeout=15, headers={"User-Agent": USER_AGENT})
         response.raise_for_status()
         logger.debug(
             f"fetched status={response.status_code} content_length={len(response.content)}"
@@ -94,7 +100,7 @@ def fetch_article(url: str) -> dict[str, Any]:
 
     try:
         article = Article(url)
-        article.download()
+        article.set_html(response.text)
         article.parse()
     except Exception as exc:
         logger.error(f"Failed to parse article: {exc}")

@@ -6,6 +6,7 @@
 - Project name change and rebranding
 - Updated .gitignore configuration
 - Enhanced README documentation
+- Added custom User-Agent headers to avoid website blocking
 
 ### Changed
 - Project structure and naming conventions
