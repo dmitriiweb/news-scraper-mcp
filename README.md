@@ -11,51 +11,13 @@ A Model Context Protocol (MCP) server that fetches article data from URLs using 
 
 ## Installation
 
-This project uses `uv` for package management and is designed to be run locally from source:
+Install directly from PyPI:
 
 ```bash
-# Clone the repository
-git clone https://github.com/dmitriiweb/article-scraper-mcp.git
-cd article-scraper-mcp
-
-# Install dependencies
-uv sync
-
-# Install the package in development mode
-uv pip install -e .
+uvx article-scraper-mcp
 ```
 
 ## Usage
-
-### As an MCP Server
-
-The article scraper can be used as an MCP server in various MCP clients:
-
-#### Claude Desktop
-
-1. Install the server locally:
-```bash
-# From the cloned repository directory
-uv run mcp install .
-```
-
-2. The server will be available as "article-scraper" in Claude Desktop
-
-#### Other MCP Clients
-
-Run the server directly from the cloned repository:
-```bash
-# Using stdio transport (default)
-uv run article-scraper-mcp
-
-# Or directly with Python
-uv run python main.py
-
-# Or using the MCP development command
-uv run mcp dev server.py
-```
-
-### Server Configuration
 
 Add to your MCP client configuration:
 
@@ -63,46 +25,32 @@ Add to your MCP client configuration:
 {
   "mcpServers": {
     "article-scraper": {
-      "command": "uv",
-      "args": ["run", "python", "main.py"],
-      "cwd": "/path/to/your/cloned/article-scraper-mcp"
+      "command": "uvx",
+      "args": ["article-scraper-mcp"]
     }
   }
 }
 ```
 
-Or for development:
-```json
-{
-  "mcpServers": {
-    "article-scraper": {
-      "command": "uv",
-      "args": ["run", "mcp", "dev", "server.py"],
-      "cwd": "/path/to/your/cloned/article-scraper-mcp"
-    }
-  }
-}
-```
+## API
 
-## Development
+### `fetch_article(url: str) -> dict[str, Any]`
 
-```bash
-# Install development dependencies
-uv sync --dev
+Fetches and parses a news article from the given URL.
 
-# Run tests (if available)
-uv run pytest
+**Parameters:**
+- `url`: The URL of the news article to fetch
 
-# Format code
-uv run black .
-uv run isort .
+**Returns:**
+A dictionary containing:
+- `title`: Article title
+- `text`: Article content text
+- `author`: Author name(s) (may be None)
+- `date`: Publication date in ISO format (may be None)
 
-# Lint code
-uv run flake8 .
-
-# Run in development mode with MCP
-uv run mcp dev server.py
-```
+**Raises:**
+- `ValueError`: If URL is invalid or article cannot be parsed
+- `requests.RequestException`: If HTTP request fails
 
 ## Requirements
 
