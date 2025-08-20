@@ -1,6 +1,6 @@
 # Article Scraper MCP
 
-A Model Context Protocol (MCP) server that fetches news article data from URLs using newspaper3k.
+A Model Context Protocol (MCP) server that fetches article data from URLs using newspaper3k.
 
 ## Features
 
@@ -15,8 +15,8 @@ This project uses `uv` for package management and is designed to be run locally 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/news-scraper-mcp.git
-cd news-scraper-mcp
+git clone https://github.com/dmitriiweb/article-scraper-mcp.git
+cd article-scraper-mcp
 
 # Install dependencies
 uv sync
@@ -29,7 +29,7 @@ uv pip install -e .
 
 ### As an MCP Server
 
-The news scraper can be used as an MCP server in various MCP clients:
+The article scraper can be used as an MCP server in various MCP clients:
 
 #### Claude Desktop
 
@@ -39,14 +39,14 @@ The news scraper can be used as an MCP server in various MCP clients:
 uv run mcp install .
 ```
 
-2. The server will be available as "news-scraper" in Claude Desktop
+2. The server will be available as "article-scraper" in Claude Desktop
 
 #### Other MCP Clients
 
 Run the server directly from the cloned repository:
 ```bash
 # Using stdio transport (default)
-uv run news-scraper-mcp
+uv run article-scraper-mcp
 
 # Or directly with Python
 uv run python main.py
@@ -62,10 +62,10 @@ Add to your MCP client configuration:
 ```json
 {
   "mcpServers": {
-    "news-scraper": {
+    "article-scraper": {
       "command": "uv",
       "args": ["run", "python", "main.py"],
-      "cwd": "/path/to/your/cloned/news-scraper-mcp"
+      "cwd": "/path/to/your/cloned/article-scraper-mcp"
     }
   }
 }
@@ -75,10 +75,10 @@ Or for development:
 ```json
 {
   "mcpServers": {
-    "news-scraper": {
+    "article-scraper": {
       "command": "uv",
       "args": ["run", "mcp", "dev", "server.py"],
-      "cwd": "/path/to/your/cloned/news-scraper-mcp"
+      "cwd": "/path/to/your/cloned/article-scraper-mcp"
     }
   }
 }
