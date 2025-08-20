@@ -1,4 +1,4 @@
-# News Scraper MCP
+# Article Scraper MCP
 
 A Model Context Protocol (MCP) server that fetches news article data from URLs using newspaper3k.
 
